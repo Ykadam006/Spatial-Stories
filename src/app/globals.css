@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Color tokens */
+  --color-base: #fff0f3;
+  --color-base-alt: #ffccd5;
+  --color-card: #ffb3c1;
+  --color-heading: #590d22;
+  --color-subheading: #800f2f;
+  --color-active: #a4133c;
+  --color-accent: #c9184a;
+  --color-cta: #ff4d6d;
+  --color-glow: #ff758f;
+  --color-soft: #ff8fa3;
+
+  /* Typography */
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-base);
+  color: var(--color-heading);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-base);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 2px;
+}
+
+/* Selection */
+::selection {
+  background: #c9184a22;
+  color: var(--color-heading);
+}
+
+/* Utility classes */
+@layer utilities {
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+  .font-sans {
+    font-family: var(--font-sans);
+  }
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  .text-heading {
+    color: var(--color-heading);
+  }
+  .text-subheading {
+    color: var(--color-subheading);
+  }
+  .text-accent {
+    color: var(--color-accent);
+  }
+  .text-cta {
+    color: var(--color-cta);
+  }
+
+  .bg-base {
+    background-color: var(--color-base);
+  }
+  .bg-base-alt {
+    background-color: var(--color-base-alt);
+  }
+  .bg-card {
+    background-color: var(--color-card);
+  }
+
+  /* Thin accent line */
+  .accent-line {
+    height: 1px;
+    background: linear-gradient(90deg, var(--color-accent), transparent);
+  }
+
+  .accent-line-full {
+    height: 1px;
+    background: var(--color-accent);
+  }
+
+  /* Blueprint grid overlay */
+  .blueprint-grid {
+    background-image:
+      linear-gradient(rgba(201, 24, 74, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201, 24, 74, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Contour lines */
+  .contour-bg {
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 39px,
+      rgba(201, 24, 74, 0.06) 39px,
+      rgba(201, 24, 74, 0.06) 40px
+    );
+  }
+
+  /* Clip reveal */
+  .clip-reveal {
+    clip-path: inset(0 100% 0 0);
+    animation: clipReveal 1.4s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  }
+
+  /* Soft glow on hover */
+  .hover-glow:hover {
+    box-shadow: 0 0 32px rgba(255, 117, 143, 0.2);
+  }
+
+  /* Nav link underline */
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--color-accent);
+    transition: width 0.3s ease;
+  }
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+}
+
+@keyframes clipReveal {
+  to {
+    clip-path: inset(0 0% 0 0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes lineGrow {
+  from { transform: scaleX(0); transform-origin: left; }
+  to { transform: scaleX(1); transform-origin: left; }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Preloader */
+.preloader-line {
+  animation: lineGrow 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  transform-origin: left center;
+}
